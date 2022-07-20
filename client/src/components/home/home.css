@@ -1,0 +1,19 @@
+#app-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  #app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  #app-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

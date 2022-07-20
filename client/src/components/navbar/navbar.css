@@ -1,0 +1,37 @@
+.home-header {
+  border-radius: 12px;
+  align-items: center;
+  background: #fff;
+  margin: 3rem auto;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-around;
+  gap: 50%;
+  letter-spacing: 1px;
+  color: #10b4f5;
+}
+
+#heading {
+  font-size: -webkit-xxx-large;
+}
+
+.header-button {
+  background: #0067e6;
+  color: #fff;
+  padding: 0.4rem;
+  border-radius: 10px;
+  border: transparent;
+  cursor: pointer;
+}
+
+div#user-mail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+  .home-header {
+    width: 86%;
+  }
+}
