@@ -84,5 +84,7 @@
 @media only screen and (max-width: 768px) {
   #post-info {
     margin-bottom: 3rem;
+    margin-right: auto;
+    margin-left: auto;
   }
 }

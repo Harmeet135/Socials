@@ -8,7 +8,9 @@ const Navbar = (props) => {
 
   return (
     <div className="home-header">
-      <h1 id="heading">Memories</h1>
+      <Link to="/">
+        <h1 id="heading">Memories</h1>
+      </Link>
 
       <div>
         {Userr ? (

@@ -15,39 +15,64 @@ const Auth = () => {
   const { Userr } = useContext(Gloabaldata);
 
   const [isSignup, setisSignup] = useState(true);
-  const [email, setregisterEmail] = useState();
+  const [email, setregisterEmail] = useState("");
   const [password, setregisterPassword] = useState("");
   const [registerName, setregisterName] = useState("");
   const [registerLast, setregisterLast] = useState("");
-  // const [loginEmail, setloginEmail] = useState("");
-  // const [loginPassword, setloginPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [error, setError] = useState("");
 
   const register = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+
+    if (!email || !password || !registerName || !registerLast || !repeatPassword) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    if (password !== repeatPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      // Additional actions after successful registration
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage);
+    }
   };
 
   const login = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {});
+
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      // Additional actions after successful login
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage);
+    }
   };
 
   const switchMode = () => {
     setisSignup((prevmode) => !prevmode);
+    setError(""); // Clear any existing error when switching between sign up and sign in
   };
 
   return (
@@ -109,6 +134,9 @@ const Auth = () => {
                     type="password"
                     placeholder="Repeat Password"
                     autoComplete="on"
+                    onChange={(event) => {
+                      setRepeatPassword(event.target.value);
+                    }}
                   />
                   <button onClick={register} className="sign-in">
                     SIGN UP
@@ -123,10 +151,12 @@ const Auth = () => {
                     SIGN IN
                   </button>
                   <button className="switchmode">
-                    <h3>dont have a ACCOUNT ? SIGN UP</h3>
+                    <h3>Don't have an account? SIGN UP</h3>
                   </button>
                 </>
               )}
+
+              {error && <div className="error-message">{error}</div>}
             </form>
           </div>
         </>

@@ -3,8 +3,10 @@ import "./post.css";
 import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import { AiFillLike, AiFillDelete } from 'react-icons/ai';
-import { deletePost, likePost } from "../../../actions/posts";
+
 import { Gloabaldata } from "../../../App";
+import { deletePost } from "../../../redux/actions/posts";
+import { likePost } from "../../../redux/api";
 
 
 const Post = ({ post }) => {

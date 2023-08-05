@@ -2,10 +2,10 @@ import Posts from "../../components/posts/Posts";
 import React, { useEffect, useState } from "react";
 import Form from "../../components/form/Form";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+
 import "./home.css";
 import Navbar from "../navbar/Navbar";
-import Auth from "../auth/Auth";
+import { getPosts } from "../../redux/actions/posts";
 
 const Home = (props) => {
   const [currentId, setcurrentId] = useState(null);

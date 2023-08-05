@@ -44,9 +44,15 @@ input[type="file"] {
   color: #fff;
 }
 
-#form-button :nth-child(2) {
+#form-button .clear {
   background: #f05288;
   color: #fff;
+}
+
+.clear{
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 7px;
 }
 
 #create-memory {
@@ -54,13 +60,23 @@ input[type="file"] {
 }
 
 #form-before {
+  height: fit-content;
+  margin: 2rem;
   font-weight: 400;
   background: white;
   font-size: 1.3rem;
   font-family: none;
   padding: 1rem 1.5rem;
-  max-height: 6rem;
   line-height: 1.9rem;
+}
+
+.error-message {
+  display: flex;
+  color: red;
+  width: fit-content;
+  margin: auto;
+  align-items: center;
+  padding-top: 1px;
 }
 
 /* -----media query ------ */

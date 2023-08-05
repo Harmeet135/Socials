@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch } from 'react-redux'
-import { createPost } from "../../actions/posts";
 import { Gloabaldata } from "../../App";
 import "./form.css"
+import { createPost } from "../../redux/api";
 
 const Form = () => {
 
   const { Userr } = useContext(Gloabaldata);
+  const [error, setError] = useState("");
 
   const [postData, setpostData] = useState({
     creator: "",
@@ -22,12 +23,16 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!postData.creator || !postData.title || !postData.message || !postData.tags || !postData.selectedFile) {
+      setError("Please fill in all the fields");
+      return;
+    }
+
     dispatch(createPost(postData))
     clear();
   };
 
   const clear = () => {
-
     setpostData({
       creator: "",
       title: "",
@@ -35,13 +40,14 @@ const Form = () => {
       tags: "",
       selectedFile: "",
     });
+    setError("");
   };
 
   return (
     <>
-
       {Userr ? (
         <div id="form-container">
+            {error && <div className="error-message">{error}</div>}
           <form autoComplete="off" onSubmit={handleSubmit}>
             <h1 id="create-memory">Create a Memory</h1>
             <div id="form-input">
@@ -49,7 +55,6 @@ const Form = () => {
                 type="text"
                 placeholder="Creator"
                 value={postData.creator}
-
                 onChange={(e) =>
                   setpostData({ ...postData, creator: e.target.value })
                 }
@@ -84,14 +89,15 @@ const Form = () => {
 
             <div id="form-button">
               <button className="form-button">Submit</button>
-              <button className="form-button" onClick={clear}>Clear</button>
             </div>
           </form>
+          <div id="form-button">
+            <button className="clear" onClick={clear}>Clear</button>
+          </div>
         </div>
       ) : (
         <h1 id="form-before">Please Sign in to create your own memories and like other's memories</h1>
       )}
-
     </>
   );
 };
