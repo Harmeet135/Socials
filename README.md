@@ -1,4 +1,4 @@
-# metclub
+# Socais
 
 Its a media app where user can create a Post , Upload It , Delete it and Like it 
  
